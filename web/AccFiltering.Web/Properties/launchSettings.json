@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "AccFiltering.Web": {
+      "commandName": "Project",
+      "applicationUrl": "http://127.0.0.1:5080",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="AccFiltering.csproj" />
+  <Project Path="tests/AccFiltering.Tests/AccFiltering.Tests.csproj" />
+  <Project Path="web/AccFiltering.Web/AccFiltering.Web.csproj" />
+</Solution>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ACC server-side copy</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <p class="eyebrow">Autodesk Construction Cloud</p>
+    <h1>Server-side NWC copy</h1>
+    <p>Copies matching <code>.nwc</code> files inside one project. File bytes stay on ACC.</p>
+  </header>
+
+  <main>
+    <form id="job-form">
+      <section>
+        <h2>Connection</h2>
+        <p class="hint">Type the credentials for this project. The access token is not read from the environment and is not saved.</p>
+        <label>APS client ID <span>optional, log only</span>
+          <input name="clientId" autocomplete="off" />
+        </label>
+        <label>APS access token
+          <input name="token" type="password" autocomplete="off" required />
+        </label>
+        <div class="pair">
+          <label>Hub ID
+            <input name="hubId" autocomplete="off" required placeholder="b. or a plain GUID" />
+          </label>
+          <label>Project ID
+            <input name="projectId" autocomplete="off" required placeholder="b. or a plain GUID" />
+          </label>
+        </div>
+      </section>
+
+      <section>
+        <h2>Folders</h2>
+        <label>Source folder path in ACC
+          <input name="sourcePath" required value="02.Shared External > USEP > All > NWC > 03.03.01 NWC" />
+        </label>
+        <label>Destination folder path in ACC
+          <input name="destinationPath" required placeholder="04.Coordination > Projectwide > NWC" />
+        </label>
+      </section>
+
+      <section>
+        <h2>Excel</h2>
+        <label>Workbook with a Model Name column
+          <input name="excel" type="file" accept=".xlsx,.xlsm" required />
+        </label>
+        <div class="pair">
+          <label>Limit <span>blank copies all matches</span>
+            <input name="limit" inputmode="numeric" placeholder="2" />
+          </label>
+          <label class="check">
+            <input name="overwrite" type="checkbox" />
+            Overwrite existing files with a new version
+          </label>
+        </div>
+        <label class="check danger">
+          <input name="execute" type="checkbox" />
+          Copy on the server. Leave this off for a dry run.
+        </label>
+      </section>
+
+      <div class="actions">
+        <button type="submit" id="run">Run</button>
+        <p id="form-error" class="error" hidden></p>
+      </div>
+    </form>
+
+    <section id="result" hidden>
+      <h2 id="result-title">Result</h2>
+      <p id="result-message"></p>
+      <dl id="paths"></dl>
+      <ul id="folders" hidden></ul>
+      <div id="summary"></div>
+      <p><a id="download" hidden>Download CSV report</a></p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Excel name</th>
+              <th>Matched file</th>
+              <th>Status</th>
+              <th>Detail</th>
+            </tr>
+          </thead>
+          <tbody id="rows"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
